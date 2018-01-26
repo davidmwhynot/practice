@@ -1,0 +1,21 @@
+/script DEFAULT_CHAT_FRAME:AddMessage("\124cff0070dd\124Hitem:0:0:0:0:0:0:0:0:0:0:0:0:15:1512:0:0:0:0:0:0:0:0:0:0:0:0:0:0\124h[Your Item]\124h\124r");
+															  0:2:3:4:5:6:7:8:9:1:2:3:4: 5:6:7:8:9:2:2:3:4:5:6:7:8:9:3
+															  00 = red = itemid
+															  02 = green = enchant
+															  03-06 = pink = gems
+															  07-13=black = whoknows
+															  14=orange = number of subsequent bonus ids = just set to 15 and use less??? maybe this will produce undesired effects
+															  15+=blue
+															
+// ideally, create a 985 arcano crystal
+
+// blue: 124cff0070dd
+// purp: 124cffa335ee
+
+
+//wowheads link
+/script DEFAULT_CHAT_FRAME:AddMessage("\124cffa335ee\124Hitem:141482::::::::110::::2:1597:3466:\124h[Unstable Arcanocrystal]\124h\124r");
+/script DEFAULT_CHAT_FRAME:AddMessage("\124cffa335ee\124Hitem:141482::::::::110::::2:1512:3466:\124h[Unstable Arcanocrystal]\124h\124r");
+
+//v2
+/script DEFAULT_CHAT_FRAME:AddMessage("\124cff0070dd\124Hitem:141482::::::::110::::14:1597:3466:::::::::::::\124h[Unstable Arcanocrystal]\124h\124r");
