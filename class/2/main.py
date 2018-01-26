@@ -1,6 +1,9 @@
 x = [2,3,4,5]
 y = [1,2,4,5,6,7]
 
+u = [1,3,5]
+v = [1,3,5]
+
 
 def intersect(a, b):
 	buffer = []
@@ -37,9 +40,11 @@ print(union(x,y))
 def equal(a, b):
 	for i in a:
 		for j in b:
-			if i != j:
-				return False
-	else:
-		return True
+			if i == j:
+				break
+		else:
+			return False
+	return True
 
 print(equal(x,y))
+print(equal(u,v))
