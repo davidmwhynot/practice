@@ -82,8 +82,11 @@ def equal(a, b):
 	return True
 
 print(equal(x,y)) # returns false
+print('\n\nu:')
+print(u)
+print('\ntest equal(u,u):') # returns false
 print(equal(u,u)) # returns true
-
+print('\n\n\n')
 
 # commenting my code took longer than it did to actually write them for the above functions. I also wrote functions for some of the other items on the list for fun since it wasn't too dificult. not going to comment them though, just print out some test data
 
@@ -98,7 +101,7 @@ def subset(a,b):
 	return True
 
 print(subset(x,y)) # returns false
-print(subset(u,v)) # returns true
+print(subset(u,u)) # returns true
 
 
 def element(a, x):
@@ -136,3 +139,47 @@ print(cartesianProduct(x,y))
 print(cartesianProduct(u,v))
 print(cartesianProduct(u,u))
 print(cartesianProduct([1,2],[1,2,3]))
+
+
+
+# clarification of equal
+def equalClarity(a, b):
+	for i in a:
+		flag = False
+		for j in b:
+			if i == j:
+				flag = True
+		if(not flag):
+			return False
+	for i in b:
+		flag = False
+		for j in a:
+			if i == j:
+				flag = True
+		if(not flag):
+			return False
+	return True
+u2 = ['2','3','1']
+v2 = ['1','a',':)']
+w = ['1','2','3']
+print('\n\n\ntest equal clarity:')
+print('u:')
+print(u)
+print('v:')
+print(v)
+print('u2:')
+print(u2)
+print('v2:')
+print(v2)
+print('w')
+print(w)
+print('\nequalClarity(u2,v2):')
+print(equalClarity(u2,v2))
+print('\nequalClarity(u2,u2):')
+print(equalClarity(u2,u2))
+print('\nequalClarity(u,v):')
+print(equalClarity(u,v))
+print('\nequalClarity(u,u):')
+print(equalClarity(u,u))
+print('\nequalClarity(u2,w):')
+print(equalClarity(u2,w))
