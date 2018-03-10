@@ -183,3 +183,12 @@ print('\nequalClarity(u,u):')
 print(equalClarity(u,u))
 print('\nequalClarity(u2,w):')
 print(equalClarity(u2,w))
+
+
+
+
+def sum(a,b):
+
+	return a + b
+
+print(sum(1,2))
