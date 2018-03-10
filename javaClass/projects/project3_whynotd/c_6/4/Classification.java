@@ -27,22 +27,23 @@
 import javax.swing.*;
 
 public class Classification {
+	enum CollegeYear {
+		FRESHMAN, SOPHMORE, JUNIOR, SENIOR
+	}
 	public static void main(String[] args) {
 		// INTRO
 		System.out.println("\n\t Classification\n\t David Whynot\n\n\n");
 
 		// MAIN
-		// declare vars
-		String inp;
-		int val;
-		Boolean flag = false;
 		// enum declaration
-		enum CollegeYear {
-			FRESHMAN, SOPHMORE, JUNIOR, SENIOR
-		}
+		// declare vars
+		CollegeYear year;
+		String inp;
+		int val = 0;
+		Boolean flag = false;
 		// get/validate input
 		do {
-			inp JOptionPane.showInputDialog(null, "Enter Number of credits")
+			inp = JOptionPane.showInputDialog(null, "Enter Number of credits");
 			if(validator(inp)) {
 				flag = true;
 				val = Integer.parseInt(inp);
@@ -51,19 +52,28 @@ public class Classification {
 				JOptionPane.showMessageDialog(null, "Invalid input! Input must be a NUMBER greater than 0.");
 			}
 		} while(!flag);
-		switch()
-
+		System.out.println("Credits: " + val);
+		if(val < 31) {
+			year = CollegeYear.FRESHMAN;
+		} else if(val <= 60) {
+			year = CollegeYear.SOPHMORE;
+		} else if(val <= 90) {
+			year = CollegeYear.JUNIOR;
+		} else {
+			year = CollegeYear.SENIOR;
+		}
+		System.out.println("Year is: " + year);
 
 		System.exit(0);
 	}
 	public static boolean validator(String s) {
 		try {
 			int n = Integer.parseInt(s);
-			if(n < 0)
+			if(n > 0) {
 				return true;
-			else
+			} else {
 				return false;
-			return false
+			}
 		} catch(Exception e) {
 			return false;
 		}
