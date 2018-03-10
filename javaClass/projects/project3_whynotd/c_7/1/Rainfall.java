@@ -13,11 +13,11 @@
 		#1 on pages 535-536  You may choose Console or GUI for the input of the 12 figures.
 
 	Type:
-	console
+	gui
 
 */
 
-
+import javax.swing.*;
 
 public class Rainfall {
 	public static void main(String[] args) {
@@ -26,34 +26,80 @@ public class Rainfall {
 
 		// MAIN
 		// create/set flag
-		boolean flag = false;
+		boolean flag;
+		int counter = 0;
+		int max = 0;
+		int min = 0;
+		double total = 0;
+		double average = 0;
+		double maxVal = 0;
+		double minVal = 0;
+		double[] figures = new double[12];
 		String inp;
-		int val;
+		String[] months = {"January",
+			"February",
+			"March",
+			"April",
+			"May",
+			"June",
+			"July",
+			"August",
+			"September",
+			"October",
+			"November",
+			"December"
+		};
 		// prompt user for input and pass that to our validate function
-		// double figures = new double[12];
-		double[12] figures;
 		do {
-			inp = JOptionPane.showInputDialog(null, "Please input a positive number.");
-			if(validator(inp)) {
+			flag = false;
+			inp = JOptionPane.showInputDialog(null, "Please input rainfall for month of " + months[counter]); // get input
+			if(validator(inp)) { // validate input
 				flag = true;
-				val = inp;
+				figures[counter] = Double.parseDouble(inp); // valid value, store in array
+				++counter;
 			}
 			else {
-				JOptionPane.showMessageDialog(null, "Please input a postive NUMBER!"); // the input was invalid
+				JOptionPane.showMessageDialog(null, "Please input a POSITIVE NUMBER!"); // the input was invalid
 			}
-		} while(!flag);
-		JOptionPane.showMessageDialog(null, "Congratulations on inputting a valid number!"); // we have exited the while loop and therefore we have given a valid number
+		} while(!flag || (counter < 12));
+		// computer total rain
+		for(double i : figures) {
+			total += i;
+		}
+		// compute average rain
+		average = total / 12;
+		// find max
+		for(int i = 0; i < figures.length; ++i) {
+			if(figures[i] > maxVal) {
+				max = i;
+				maxVal = figures[i];
+			}
+		}
+		// find min
+		minVal = figures[0];
+		for(int i = 0; i < figures.length; ++i) {
+			if(figures[i] < minVal) {
+				min = i;
+				minVal = figures[i];
+			}
+		}
+
+		// display values
+		System.out.println("Total for year: " + total);
+		System.out.println("Average monthly: " + average);
+		System.out.println("Max: " + months[max] + " with " + maxVal + " units of rainfall.");
+		System.out.println("Min: " + months[min] + " with " + minVal + " units of rainfall.");
 		System.exit(0);
 	}
 	public static boolean validator(String s) {
-		try { // try to validate the input
-			double n = Double.parseDouble(s); // try to convert the input to a double
-			if(n > 0) // if input is succesfully converted, we know it is a number. Here, we check to make sure it is in the necessary range
-				return true; // success! the number was in the proper range
+		try {
+			double n = Double.parseDouble(s);
+			if(n > 0)
+				return true;
 			else
-				return false; // even though the user did input a number, it was not in the proper range. return false
-		} catch(Exception e) { // conversion to a double failed...
-			return false; // we can conclude that the input was NOT a number and return false
+				return false;
+		} catch(Exception e) {
+			return false;
 		}
 	}
 }
