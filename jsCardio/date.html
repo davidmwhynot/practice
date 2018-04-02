@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	let a = new Date();
+	let w = Number(a.getTime());
+	let b = w + 86400000*60;
+	console.log(b);
+	let n = new Date(b);
+	console.log("" + w);
+	console.log("" + n.getTime());
+	console.log(a);
+	console.log(n);
+	</script>
+</body>
+</html>
