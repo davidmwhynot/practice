@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FunFXController">
+   <children>
+      <Label layoutX="266.0" layoutY="21.0" text="lets have fun" />
+      <Label layoutX="146.0" layoutY="52.0" text="Enter Your name" />
+      <TextField fx:id="textField" layoutX="241.0" layoutY="48.0" />
+      <CheckBox fx:id="checkbox1" layoutX="77.0" layoutY="87.0" mnemonicParsing="false" text="Check here if you love Java" onAction="#checkbox1checked" />
+      <CheckBox fx:id="checkbox2" layoutX="292.0" layoutY="87.0" mnemonicParsing="false" text="Check here if you would rather not say" onAction="#checkbox2checked" />
+			<ComboBox fx:id="comboBox" layoutX="69.0" layoutY="188.0" prefWidth="150.0" onAction="#comboBoxClick"/>
+      <Label fx:id="outputLabel" layoutX="169.0" layoutY="118.0" prefHeight="17.0" prefWidth="246.0" />
+      <Label fx:id="outputLabel2" layoutX="69.0" layoutY="220.0" prefHeight="17.0" prefWidth="246.0" />
+   </children>
+</AnchorPane>
