@@ -1,6 +1,6 @@
 public class Test {
 	public static void main(String[] args) {
-		int[] scores = new int[5];
-		System.out.println(7 / 2);
+		String s = "Hamburgers";
+		System.out.println(s.substring(4,7));
 	}
 }
