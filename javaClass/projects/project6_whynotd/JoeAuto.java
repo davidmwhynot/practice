@@ -1,3 +1,28 @@
+/*
+
+	File Name:
+	JoeAuto.java
+
+	Author:
+	David Whynot
+
+	Date Created:
+	4/20/18
+
+	Description:
+	This version of the application should use JavaFX techniques and should NOT use any dialog boxes.
+	For a little extra credit and fun, display a picture of a cookie in the window
+
+	Type:
+	javaFX
+
+*/
+
+
+// GUI BASED
+
+import javafx.scene.image.*;
+import java.io.*;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import java.util.*;
@@ -18,129 +43,123 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-
 public class JoeAuto extends Application {
-	// calculateButton;
-	Stage joeWindow;
-	Scene joeScene;
+	Stage stage;
 
-  public static void main(String args[]) {
-    launch(args);
-    Date today = new Date();
-		System.out.println("DemoPlayers.java by Luke Bonner "+today);
-  }
+	public static void main(String[] args) {
+		// MAIN
+		launch(args);
+
+		System.exit(0);
+	}
 
   @Override
-  public void start(Stage joeStage) throws Exception {
-		double hourscharge=0.0;
-		double partscharge=0.0;
-    CheckBox oil = new CheckBox("Oil Change");
-    CheckBox lube = new CheckBox("Lube Job");
-    CheckBox radFlush = new CheckBox("Radiator Flush");
-    CheckBox tranFlush = new CheckBox("Transmission Flash");
-    CheckBox inspection = new CheckBox("Inspection");
-    CheckBox muffler = new CheckBox("Muffler Replacement");
-    CheckBox tireRotation = new CheckBox("Tire Rotation");
-    TextField hours = new TextField("Enter hours billed");
-    TextField parts = new TextField("Enter cost of parts Used");
-
-		Button calculateButton = new Button();
-		calculateButton.setText("calculate");
-
-    Pane joeLayout = new Pane();
+  public void start(Stage stage) throws Exception {
+		// create objects
+		VBox pain = new VBox(15);
+		Scene scene = new Scene(pain, 500, 400);
+		Date today = new Date();
 
 
-		joeStage.setTitle("Joe's Auto *Fully customizable* Checkout");
+		// declare vars
+		String title = "JoeAuto | By David Whynot | " + today;
+		String defOut = "Please fill out the form to obtain an invoice";
 
-		joeLayout.getChildren().add(hours);
-		joeLayout.getChildren().add(parts);
-		joeLayout.getChildren().add(calculateButton);
-		joeLayout.getChildren().add(oil);
-		joeLayout.getChildren().add(lube);
-		joeLayout.getChildren().add(radFlush);
-		joeLayout.getChildren().add(tranFlush);
-		joeLayout.getChildren().add(inspection);
-		joeLayout.getChildren().add(muffler);
-		joeLayout.getChildren().add(tireRotation);
 
-    //Joe's "fully customizable" GUI
-		calculateButton.setOnMouseDragged(e -> {
-			calculateButton.setLayoutX(e.getX());
-			calculateButton.setLayoutY(e.getY());
-		});
-		hours.setOnMouseDragged(e -> {
-			hours.setLayoutX(e.getX());
-			hours.setLayoutY(e.getY());
-		});
-		parts.setOnMouseDragged(e -> {
-			parts.setLayoutX(e.getX());
-			parts.setLayoutY(e.getY());
-		});
-		oil.setOnMouseDragged(e -> {
-			oil.setLayoutX(e.getX());
-			oil.setLayoutY(e.getY());
-		});
-		lube.setOnMouseDragged(e -> {
-			lube.setLayoutX(e.getX());
-			lube.setLayoutY(e.getY());
-		});
-		radFlush.setOnMouseDragged(e -> {
-			radFlush.setLayoutX(e.getX());
-			radFlush.setLayoutY(e.getY());
-		});
-		tranFlush.setOnMouseDragged(e -> {
-			tranFlush.setLayoutX(e.getX());
-			tranFlush.setLayoutY(e.getY());
-		});
-		inspection.setOnMouseDragged(e -> {
-			inspection.setLayoutX(e.getX());
-			inspection.setLayoutY(e.getY());
-		});
-		muffler.setOnMouseDragged(e -> {
-			muffler.setLayoutX(e.getX());
-			muffler.setLayoutY(e.getY());
-		});
-		tireRotation.setOnMouseDragged(e -> {
-			tireRotation.setLayoutX(e.getX());
-			tireRotation.setLayoutY(e.getY());
-		});
+		// create ui component objects
+		VBox checkBox = new VBox(15);
+			CheckBox oil = new CheckBox("Oil Change");
+	    CheckBox lube = new CheckBox("Lube Job");
+	    CheckBox radiator = new CheckBox("Radiator Flush");
+	    CheckBox transmission = new CheckBox("Transmission Flash");
+	    CheckBox inspect = new CheckBox("Inspection");
+	    CheckBox muffler = new CheckBox("Muffler Replacement");
+	    CheckBox tire = new CheckBox("Tire Rotation");
 
-    EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent event){
-	    	double subtotalcharge = 0.0;
-		    if(oil.isSelected()) {
-		      subtotalcharge += 35;
-		    }
-		    if(lube.isSelected()) {
-		      subtotalcharge += 25;
-		    }
-		    if(radFlush.isSelected()) {
-		      subtotalcharge += 50;
-		    }
-		    if(tranFlush.isSelected()) {
-		      subtotalcharge += 120;
-		    }
-		    if(inspection.isSelected()) {
-		      subtotalcharge += 35;
-		    }
-		    if(muffler.isSelected()) {
-		      subtotalcharge += 50;
-		    }
-		    if(tireRotation.isSelected()) {
-		      subtotalcharge += 50;
-		    }
-		    subtotalcharge = partscharge + (hourscharge * 60);
-        JOptionPane.showMessageDialog(null, "your total charge is: $" + subtotalcharge);
+		HBox outBox = new HBox(15);
+			Label output = new Label(defOut);
+
+		HBox hoursBox = new HBox(15);
+			Label hoursLbl = new Label("Hours Billed:");
+			TextField hoursInp = new TextField();
+
+		HBox partsBox = new HBox(15);
+			Label partsLbl = new Label("Cost of additional parts used:");
+			TextField partsInp = new TextField();
+
+		Button submit = new Button("Create Invoice");
+
+
+		// sets
+		stage.setTitle(title);
+		stage.setScene(scene);
+		pain.setPadding(new Insets(15));
+
+
+		// add ui componenets to pain
+		pain.getChildren().add(checkBox);
+			checkBox.getChildren().add(oil);
+			checkBox.getChildren().add(lube);
+			checkBox.getChildren().add(radiator);
+			checkBox.getChildren().add(transmission);
+			checkBox.getChildren().add(inspect);
+			checkBox.getChildren().add(muffler);
+			checkBox.getChildren().add(tire);
+		pain.getChildren().add(hoursBox);
+			hoursBox.getChildren().add(hoursLbl);
+			hoursBox.getChildren().add(hoursInp);
+		pain.getChildren().add(partsBox);
+			partsBox.getChildren().add(partsLbl);
+			partsBox.getChildren().add(partsInp);
+		pain.getChildren().add(submit);
+		pain.getChildren().add(outBox);
+			outBox.getChildren().add(output);
+
+
+		// add event listeners
+		submit.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+      public void handle(ActionEvent ae) {
+				double total = 0;
+				try {
+					if(oil.isSelected()) {
+			      total += 35;
+			    }
+			    if(lube.isSelected()) {
+			      total += 25;
+			    }
+			    if(radiator.isSelected()) {
+			      total += 50;
+			    }
+			    if(transmission.isSelected()) {
+			      total += 120;
+			    }
+			    if(inspect.isSelected()) {
+			      total += 35;
+			    }
+			    if(muffler.isSelected()) {
+			      total += 50;
+			    }
+			    if(tire.isSelected()) {
+			      total += 50;
+			    }
+					if(!hoursInp.getText().equals("")) {
+						total += 60 * Double.parseDouble(hoursInp.getText());
+					}
+					if(!partsInp.getText().equals("")) {
+						total += Double.parseDouble(partsInp.getText());
+					}
+					String finalOut = String.format("Total: $%,.2f%n", total);
+					output.setText(finalOut);
+				} catch(NumberFormatException e) {
+					output.setText("Please provide numeric values for hours and cost of additional parts!");
+				}
       }
-    };
-    calculateButton.setOnAction(buttonHandler);
-    Scene joeScene = new Scene(joeLayout, 300, 250);
-    joeStage.setScene(joeScene);
-    joeStage.show();
-  }
+    });
+
+		stage.show();
+	}
 }
