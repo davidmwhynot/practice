@@ -1,3 +1,21 @@
+/*
+
+	File Name:
+	GradedActivity.java
+
+	Author:
+	David Whynot
+
+	Date Created:
+	4/30/18
+
+	Description:
+	Class presented in chapter 9. Essay extends this.
+
+	Type:
+	console
+
+*/
 
 public class GradedActivity {
 	private double score;

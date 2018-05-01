@@ -1,3 +1,21 @@
+/*
+
+	File Name:
+	Essay.java
+
+	Author:
+	David Whynot
+
+	Date Created:
+	4/30/18
+
+	Description:
+	Extends GradedActivity. Determines the grade a student receives on an essay.
+
+	Type:
+	console
+
+*/
 
 public class Essay extends GradedActivity {
 	private final double GRAMMAR_WEIGHT = .3;
@@ -9,13 +27,16 @@ public class Essay extends GradedActivity {
 	private double spelling;
 	private double length;
 	private double content;
-	public GradedActivity() {
+
+	public Essay() {
+		super();
 		grammar = 0;
 		spelling = 0;
 		length = 0;
 		content = 0;
 	}
-	public GradedActivity(double g, double s, double l, double c) {
+	public Essay(double g, double s, double l, double c) {
+		super();
 		grammar = g;
 		spelling = s;
 		length = l;
@@ -50,7 +71,7 @@ public class Essay extends GradedActivity {
 		content = c;
 		this.updateScore();
 	}
-	public void updateScore() {
+	private void updateScore() {
 		this.setScore(grammar * GRAMMAR_WEIGHT + spelling * SPELLING_WEIGHT + length * LENGTH_WEIGHT + content * CONTENT_WEIGHT);
 	}
 }

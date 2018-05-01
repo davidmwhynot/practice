@@ -7,7 +7,7 @@
 	David Whynot
 
 	Date Created:
-	2/15/18
+	4/30/18
 
 	Description:
 
@@ -25,7 +25,7 @@ public class AppName {
 	public static void main(String[] args) {
 		// INTRO
 		Date today = new Date();
-		System.out.println("\n\n\nStringPlay\nBy David Whynot\n" + today + "\n\n\n");
+		System.out.println("\n\n\nAppName\nBy David Whynot\n" + today + "\n\n\n");
 
 		// MAIN
 
