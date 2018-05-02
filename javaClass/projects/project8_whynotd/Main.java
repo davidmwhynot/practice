@@ -52,8 +52,8 @@ public class Main extends Application {
 
 
 		// create objects
-		VBox pain = new VBox(15);
-		Scene scene = new Scene(pain, 550, 350);
+		HBox pain = new HBox(15);
+		Scene scene = new Scene(pain, 550, 250);
 		java.util.Date today = new java.util.Date();
 
 
@@ -62,12 +62,12 @@ public class Main extends Application {
 
 
 		// create ui component objects
-		HBox sub1 = new HBox(15);
+		// HBox sub1 = new HBox(15);
 		VBox lCol = new VBox(15);
 		VBox rCol = new VBox(15);
 
-		HBox searchInpBox = new HBox(15);
 		Label searchLbl = new Label("Search by student ID:");
+		HBox searchInpBox = new HBox(15);
 		TextField searchInp = new TextField();
 		Button searchBtn = new Button("Search");
 
@@ -79,46 +79,108 @@ public class Main extends Application {
 
 		HBox idBox = new HBox(15);
 		Label idLbl = new Label("Student ID:");
+		TextField idInp = new TextField();
 
 		HBox fnameBox = new HBox(15);
 		Label fnameLbl = new Label("First name:");
-
+		TextField fnameInp = new TextField();
 
 		HBox lnameBox = new HBox(15);
 		Label lnameLbl = new Label("Last name:");
+		TextField lnameInp = new TextField();
 
 
 		HBox majorBox = new HBox(15);
 		Label majorLbl = new Label("Major code:");
 		ComboBox majorInp = new ComboBox(FXCollections.observableArrayList(getMajorCodes()));
 
-		Button addButton = new Button("Add Student");
+		Button addBtn = new Button("Add Student");
 
 
 		// sets
 		stage.setTitle(title);
 		pain.setPadding(new Insets(15));
+		lCol.setMaxWidth(300);
+		rCol.setMaxWidth(300);
 
 
 		// add ui componenets to pain
-		pain.getChildren().add(sub1);
-			sub1.getChildren().add(lCol);
-			sub1.getChildren().add(rCol);
-				rCol.getChildren().add(searchInpBox);
-				rCol.getChildren().add(searchOutBox);
+		pain.getChildren().add(lCol);
+			lCol.getChildren().add(newLbl);
+			lCol.getChildren().add(idBox);
+				idBox.getChildren().add(idLbl);
+				idBox.getChildren().add(idInp);
+			lCol.getChildren().add(fnameBox);
+				fnameBox.getChildren().add(fnameLbl);
+				fnameBox.getChildren().add(fnameInp);
+			lCol.getChildren().add(lnameBox);
+				lnameBox.getChildren().add(lnameLbl);
+				lnameBox.getChildren().add(lnameInp);
+			lCol.getChildren().add(majorBox);
+				majorBox.getChildren().add(majorLbl);
+				majorBox.getChildren().add(majorInp);
+			lCol.getChildren().add(addBtn);
+		pain.getChildren().add(rCol);
+			rCol.getChildren().add(searchLbl);
+			rCol.getChildren().add(searchInpBox);
+				searchInpBox.getChildren().add(searchInp);
+				searchInpBox.getChildren().add(searchBtn);
+			rCol.getChildren().add(searchOutBox);
+				searchOutBox.getChildren().add(searchOutName);
+				searchOutBox.getChildren().add(searchOutMajor);
 
 
 		// add event listeners
-		EventHandler<ActionEvent> updateTotal = new EventHandler<ActionEvent>() {
+		addBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
       public void handle(ActionEvent ae) {
-				// event handler
+				// add event handler
+				try {
+					// Connection db = DriverManager.getConnection("jdbc:mysql://localhost:3306/college?useSSL=false","root","");
+					Connection db = DriverManager.getConnection("jdbc:derby:college;create=true");
+					Statement stmt = db.createStatement();
+					String query = "INSERT INTO student (student_number, student_fname, student_lname, student_major) VALUES (" + idInp.getText() + ", '" + fnameInp.getText() + "', '" + lnameInp.getText() + "', '" + majorInp.getValue() + "')"; // i just LOVE sql injection vulnerabilities
+					System.out.println(query);
+					stmt.executeUpdate(query);
+					db.close();
+				} catch(Exception e) {
+					System.out.println("ERROR: " + e.getMessage());
+					System.out.println("\n\n--------------------------\n\t\tSTACKTRACE\n--------------------------\n\n");
+					e.printStackTrace();
+					System.out.println("\n\n--------------------------\n\t\tEND\n--------------------------\n\n");
 
+				}
       }
-		};
-		genRegInp.setOnAction(updateTotal);
-		stuRegInp.setOnAction(updateTotal);
-		dinnerInp.setOnAction(updateTotal);
+		});
+		searchBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+      public void handle(ActionEvent ae) {
+				// search event handler
+				try {
+					// Connection db = DriverManager.getConnection("jdbc:mysql://localhost:3306/college?useSSL=false","root","");
+					Connection db = DriverManager.getConnection("jdbc:derby:college;create=true");
+					Statement stmt1 = db.createStatement();
+					String query1 = "SELECT student_fname, student_lname, student_major FROM student WHERE student_number = " + searchInp.getText();
+					ResultSet res1 = stmt1.executeQuery(query1);
+					while(res1.next()) {
+						searchOutName.setText(res1.getString("student_fname") + " " + res1.getString("student_lname"));
+						Statement stmt2 = db.createStatement();
+						String query2 = "SELECT major_description FROM major WHERE major_code = '" + res1.getString("student_major") + "'";
+						ResultSet res2 = stmt2.executeQuery(query2);
+						while(res2.next()) {
+							searchOutMajor.setText(res2.getString("major_description"));
+						}
+					}
+					db.close();
+				} catch(Exception e) {
+					System.out.println("ERROR: " + e.getMessage());
+					System.out.println("\n\n--------------------------\n\t\tSTACKTRACE\n--------------------------\n\n");
+					e.printStackTrace();
+					System.out.println("\n\n--------------------------\n\t\tEND\n--------------------------\n\n");
+
+				}
+      }
+		});
 
 		stage.setScene(scene);
 		stage.show();
@@ -127,22 +189,28 @@ public class Main extends Application {
 		try {
 			// Connection db = DriverManager.getConnection("jdbc:mysql://localhost:3306/college?useSSL=false","root","");
 			Connection db = DriverManager.getConnection("jdbc:derby:college;create=true");
-			Statement drops = db.createStatement();
+			Statement stmt = db.createStatement();
+			String query = "SELECT major_code FROM major";
+			ResultSet res = stmt.executeQuery(query);
+			ArrayList<String> buffer = new ArrayList<String>();
+			while(res.next()) {
+				buffer.add(res.getString("major_code"));
+			}
 			db.close();
+			return buffer.toArray(new String[buffer.size()]);
 		} catch(Exception e) {
 			System.out.println("ERROR: " + e.getMessage());
 			System.out.println("\n\n--------------------------\n\t\tSTACKTRACE\n--------------------------\n\n");
 			e.printStackTrace();
 			System.out.println("\n\n--------------------------\n\t\tEND\n--------------------------\n\n");
+			String[] returnArray = {"ERROR"};
+			return returnArray;
 		}
 	}
 	private static void dbSetup() {
 		try {
 			// Connection db = DriverManager.getConnection("jdbc:mysql://localhost:3306/college?useSSL=false","root","");
 			Connection db = DriverManager.getConnection("jdbc:derby:college;create=true");
-			Statement drops = db.createStatement();
-			String dq1 = "DROP TABLE student";
-			String dq2 = "DROP TABLE major";
 			DatabaseMetaData metadata = db.getMetaData();
 			String[] names = {"TABLE"};
 			ResultSet tableNames = metadata.getTables(null, null, null, names);
@@ -171,8 +239,6 @@ public class Main extends Application {
 					System.out.println(res.getString("student_number") + " " + res.getString("student_fname"));
 				}
 
-			} else {
-				drops.executeUpdate(dq1);
 			}
 			if(!majorFlag) {
 				// create the major table
@@ -188,8 +254,6 @@ public class Main extends Application {
 				while(res.next()) {
 					System.out.println(res.getString("major_code") + " " + res.getString("major_description"));
 				}
-			} else {
-				drops.executeUpdate(dq2);
 			}
 			db.close();
 		} catch(Exception e) {
