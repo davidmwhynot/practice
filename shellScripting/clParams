@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# $# - number of arguments
+# $0 - path to the executed script
+# $1 - first parameter to the script on the cl
+# ${10} - 10th parameter to the script on the cl
+
+echo "1st arg: $1"
+
+sum=0
+
+while [[ $# -gt 0 ]]; do
+	num=$1
+	sum=$((sum + num))
+	shift # moves the 2nd argument passed to the function into the first
+done
+
+echo "sum is: $sum"

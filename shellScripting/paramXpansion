@@ -1,0 +1,25 @@
+#!/bin/bash
+
+
+name="David"
+
+echo "${name}'s pc"
+
+
+samp_string="The dog climbed the tree"
+echo "${samp_string//dog/cat}"
+
+echo "name: $name"
+echo "(:=) I am name ${name:=Dan}"
+echo "(:=) I am name1 ${name1:=Dan}"
+echo "(:-) I am name ${name:-Dil}"
+echo "(:-) I am name2 ${name2:-Dil}"
+
+
+rand_str="A random string"
+
+echo "String Length : ${#rand_str}"
+echo "${rand_str:2}"
+echo "${rand_str:2:7}"
+echo "${rand_str#*A }"
+
