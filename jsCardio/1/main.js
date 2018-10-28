@@ -11,7 +11,7 @@ let testNotPal = "hello";
 
 // functions
 
-// CHALLENGE 1: REVERSE A STRING
+// Challenge 1: REVERSE A STRING
 // Return a string in reverse
 // ex. reverseString('hello') === 'olleh'
 
@@ -24,7 +24,7 @@ function reverseString(s) {
 }
 
 
-// CHALLENGE 2: VALIDATE A PALINDROME
+// Challenge 2: VALIDATE A PALINDROME
 // Return true if palindrom and false if not
 // ex. isPalindrome('racecar') === 'true', isPalindrome('hello') === false
 
@@ -38,7 +38,7 @@ function isPalindrome(s) {
 }
 
 
-// CHALLENGE 3: REVERSE AN INTEGER
+// Challenge 3: REVERSE AN INTEGER
 // Return an integer in reverse
 // ex. reverseInt(521) === 125
 
@@ -51,7 +51,7 @@ function reverseInt(int) {
 	return buffer - 1;
 }
 
-// CHALLENGE 4: CAPITALIZE LETTERS
+// Challenge 4: CAPITALIZE LETTERS
 // Return a string with the first letter of every word capitalized
 // ex. capitalizeLetters('i love javascript') === 'I Love Javascript';
 
@@ -68,7 +68,7 @@ function capitalizeLetters(s) {
 	return buffer;
 }
 
-// CHALLENGE 5: MAX CHARACTER
+// Challenge 5: MAX CHARACTER
 // Return the character that is the most common in a string
 // ex. maxCharacter('javascript') == 'a'
 
@@ -106,7 +106,7 @@ function maxCharacter(s) {
 // test functions
 let output = `
 	<div>
-		<h4>CHALLENGE 1:</h4>
+		<h4>Challenge 1:</h4>
 		${testString}
 		<br />
 		${reverseString(testString)}
@@ -117,7 +117,7 @@ let output = `
 		${reverseString(testPhrase)}
 	</div>
 	<div>
-		<h4>CHALLENGE 2:</h4>
+		<h4>Challenge 2:</h4>
 		${testPal}
 		<br />
 		${isPalindrome(testPal)}
@@ -128,7 +128,7 @@ let output = `
 		${isPalindrome(testNotPal)}
 	</div>
 	<div>
-		<h4>CHALLENGE 3:</h4>
+		<h4>Challenge 3:</h4>
 		${52123}
 		<br />
 		${reverseInt(52123)}
@@ -139,7 +139,7 @@ let output = `
 		${reverseInt(69)}
 	</div>
 	<div>
-		<h4>CHALLENGE 4:</h4>
+		<h4>Challenge 4:</h4>
 		${testPhrase}
 		<br />
 		${capitalizeLetters(testPhrase)}
@@ -150,7 +150,7 @@ let output = `
 		${capitalizeLetters(testPhrase2)}
 	</div>
 	<div>
-		<h4>CHALLENGE 5:</h4>
+		<h4>Challenge 5:</h4>
 		${testPhrase}
 		<br />
 		${capitalizeLetters(testPhrase)}
@@ -161,7 +161,7 @@ let output = `
 		${capitalizeLetters(testPhrase2)}
 	</div>
 	<div>
-		<h4>CHALLENGE 6:</h4>
+		<h4>Challenge 6:</h4>
 		${testPhrase}
 		<br />
 		${capitalizeLetters(testPhrase)}
